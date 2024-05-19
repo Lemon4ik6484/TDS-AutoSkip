@@ -7,7 +7,7 @@ This program uses gamepad emulation, because of roblox limits
 Currently gamepad emulation library works stable only on windows
 for more info go to https://pypi.org/project/vgamepad/
 
-Before running the program make sure to install all dependencies with "pip install vgamepad Pillow keyboard"
+Before running the program make sure to install all dependencies with "pip install vgamepad Pillow keyboard json"
 To start program just run "auto_skip.py" with python
 
 ~~~ ATTENTION ~~~

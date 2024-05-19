@@ -3,6 +3,7 @@ import time
 import keyboard
 import vgamepad as vg
 import json
+import pathlib
 
 gamepad = vg.VX360Gamepad()
 
@@ -93,7 +94,7 @@ while True:
         quit()
 
     if pixel_pos:
-        with open('config.json', 'r') as json_file:
+        with open(f"{pathlib.Path(__file__).parent.resolve()}\\config.json", 'r') as json_file:
             config = json.load(json_file)
 
         if config["PizzaParty"] == "True":

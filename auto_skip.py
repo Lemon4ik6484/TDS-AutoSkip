@@ -2,6 +2,7 @@ from PIL import ImageGrab
 import time
 import keyboard
 import vgamepad as vg
+import json
 
 gamepad = vg.VX360Gamepad()
 
@@ -29,6 +30,62 @@ y_percentage = 0.16
 width = 15
 height = 15
 
+def default_press():
+    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_DOWN)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_A)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_A)
+    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_DOWN)
+    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
+    gamepad.update()
+
+def party_press():
+    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_RIGHT)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_RIGHT)
+    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_DOWN)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_DOWN)
+    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_LEFT)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_LEFT)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_LEFT)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_A)
+    gamepad.update()
+    time.sleep(0.03)
+    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_A)
+    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
+    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_LEFT)
+    gamepad.update()
+    time.sleep(1)
+    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
+    gamepad.update()
+
 while True:
     pixel_pos = check_colors_in_screenshot(colors_to_check, x_percentage, y_percentage, width, height)
 
@@ -36,25 +93,14 @@ while True:
         quit()
 
     if pixel_pos:
-        gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
-        gamepad.update()
-        time.sleep(0.03)
-        gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
-        gamepad.update()
-        time.sleep(0.03)
-        gamepad.left_joystick_float(x_value_float=0.0, y_value_float=-1.0)
-        gamepad.update()
-        time.sleep(0.03)
-        gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_A)
-        gamepad.update()
-        time.sleep(0.03)
-        gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_A)
-        gamepad.left_joystick_float(x_value_float=0.0, y_value_float=0.0)
-        gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
-        gamepad.update()
-        time.sleep(0.03)
-        gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_BACK)
-        gamepad.update()
+        with open('config.json', 'r') as json_file:
+            config = json.load(json_file)
+
+        if config["PizzaParty"] == "True":
+            party_press()
+        else:
+            default_press()
+
         print("Color found")
         time.sleep(15)
     else:

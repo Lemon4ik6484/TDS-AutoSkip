@@ -1,7 +1,7 @@
 # TDS AutoSkip
 
 To use this program you need to have python 3.12+ installed
-you can download it from https://www.python.org/downloads/
+you can download it from https://apps.microsoft.com/detail/9ncvdn91xzqp?hl=en-mt&gl=MT or https://www.python.org/downloads/
 
 This program uses gamepad emulation, because of roblox limits
 Currently gamepad emulation library works stable only on windows
